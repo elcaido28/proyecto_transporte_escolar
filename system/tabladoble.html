@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<style media="screen">
+td.details-control {
+  background-image: url('img/details_open.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background-image: url('img/details_close.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+</style>
+  <body>
+
+
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+<td class=" details-control"></td><td class="sorting_1">Airi Satou</td><td>Accountant</td><td>Tokyo</td><td>$162,700</td>
+    </table>
+
+  <script>
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td></td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td></td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
+
+$(document).ready(function() {
+    var table = $('#example').DataTable( {
+
+    } );
+
+    // Add event listener for opening and closing details
+    $('#example tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format() ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
+
+  </script>
+
+  </body>
+</html>

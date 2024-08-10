@@ -1,0 +1,3 @@
+nombre bd: ago13_transporte_escolar
+user: ago13_root
+pass: 13_Agosto_root
